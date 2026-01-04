@@ -185,7 +185,9 @@ res <-fit_cthoubv(
   deltaY = sim$dY, time = head(sim$time,-1), 
   h = 1, trans_init = rbind( c(0, 3), c(3, 0)), 
   gamma0_init = runif(1,1,5), gamma1_init = runif(1,2,6), phi0_init = runif(1,0.3,0.7), 
-  sigma_s = 0.02, dt = sim$dt[1],mu_hidden_model = 5e-4, sigma_hidden_model = 1e-2)
+  sigma_s = 0.02, dt = sim$dt[1], hmmNorm(mean = 5e-4, sd = 1e-2),
+  hmmNorm(mean = 5e-4, sd = 1e-2)
+  )
 
 plot_ctHOUbv(sim,res)
 ```
