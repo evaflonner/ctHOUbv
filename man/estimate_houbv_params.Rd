@@ -2,7 +2,7 @@
 % Please edit documentation in R/loglik_glm.R
 \name{estimate_houbv_params}
 \alias{estimate_houbv_params}
-\title{Estimate OU Mean-Reversion Parameters}
+\title{Estimate OU Parameters}
 \usage{
 estimate_houbv_params(
   deltaY,
@@ -19,22 +19,26 @@ estimate_houbv_params(
 \arguments{
 \item{deltaY}{Observed increments.}
 
+\item{prob0}{Mixture state 1 probabilities.}
+
+\item{prob1}{Mixture state 2 probabilities.}
+
+\item{gamma0_init}{Initial value for gamma0.}
+
+\item{gamma1_init}{Initial value for gamma1.}
+
+\item{phi0_init}{Initial value of the process.}
+
 \item{h}{Linear drift.}
 
-\item{dt}{Time increments.}
+\item{dt}{Time increment.}
 
 \item{sigma_s}{Observation noise volatility.}
-
-\item{p}{Filtered state probabilities.}
-
-\item{a}{OU drift parameters.}
-
-\item{phi0}{Initial value of the process.}
 }
 \value{
 An \code{optim} object containing parameter estimates.
 }
 \description{
-Estimates the mean-reversion parameters of the bounded-variation
+Estimates the parameters of the bounded-variation
 OU process via likelihood maximization.
 }

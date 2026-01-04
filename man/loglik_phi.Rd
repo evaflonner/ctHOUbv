@@ -16,8 +16,6 @@ loglik_phi(deltaY, phi, h, dt, sigma_s)
 \item{dt}{Time increments.}
 
 \item{sigma_s}{Observation noise volatility.}
-
-\item{gamma}{Mean-reversion parameters.}
 }
 \value{
 Numeric value of the negative log-likelihood.

@@ -4,18 +4,22 @@
 \alias{step1_cthmm}
 \title{Estimate Continuous-Time Hidden Markov Model}
 \usage{
-step1_cthmm(deltaY, time, trans_init, obs_noise, dt)
+step1_cthmm(deltaY, time, trans_init, dt, hidden_model0, hidden_model1)
 }
 \arguments{
 \item{deltaY}{Numeric vector of observed increments.}
 
 \item{time}{Observation times.}
 
-\item{Q_init}{Initial generator matrix.}
+\item{trans_init}{Initial generator matrix.}
 
-\item{m_init}{Initial emission means.}
+\item{dt}{Time increment.}
 
-\item{sigma_s}{Observation noise volatility.}
+\item{hidden_model0}{Hidden model estimated in step 1 to get prior probabilities for the first state. Should be of form hmmNorm(mean,sd).}
+
+\item{hidden_model1}{Hidden model estimated in step 1 to get prior probabilities for the second state. Should be of form hmmNorm(mean,sd).}
+
+\item{obs_noise}{Observation noise.}
 }
 \value{
 A list containing the fitted HMM, estimated generator matrix,
@@ -23,7 +27,7 @@ and filtered state probabilities.
 }
 \description{
 Estimates a two-state continuous-time hidden Markov model
-using Gaussian emissions and returns filtered state probabilities.
+with Gaussian emissions.
 }
 \details{
 This function relies on the \pkg{msm} package to compute

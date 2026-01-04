@@ -2,7 +2,7 @@
 % Please edit documentation in R/em_algorithm.R
 \name{fit_cthoubv}
 \alias{fit_cthoubv}
-\title{Fit a Continuous-Time Hidden OU Model with Bounded Variation}
+\title{Fit a Continuous-Time Hidden Ornstein-Uhlenbeck process of bounded variation}
 \usage{
 fit_cthoubv(
   deltaY,
@@ -14,6 +14,9 @@ fit_cthoubv(
   phi0_init,
   sigma_s,
   dt,
+  hidden_model0,
+  hidden_model1,
+  mode = "mixture_probs",
   max_iter = 50,
   tol = 1e-04
 )
@@ -23,41 +26,43 @@ fit_cthoubv(
 
 \item{time}{Numeric vector of observation times \eqn{t_n}.}
 
+\item{h}{Linear drift.}
+
+\item{trans_init}{Initial generator matrix for CTMC.}
+
+\item{gamma0_init}{Initial value for gamma0.}
+
+\item{gamma1_init}{Initial value for gamma1.}
+
+\item{phi0_init}{Initial value of the process.}
+
 \item{sigma_s}{Observation noise volatility.}
 
-\item{dt}{Numeric vector of time increments \eqn{\Delta_n}.}
+\item{dt}{Time increment.}
+
+\item{hidden_model0}{Hidden model estimated in step 1 to get prior probabilities for the first state. Should be of form hmmNorm(mean,sd).}
+
+\item{hidden_model1}{Hidden model estimated in step 1 to get prior probabilities for the second state. Should be of form hmmNorm(mean,sd).}
+
+\item{mode}{Either "mixture_probs" for "MAP_probs", meaning that for each time point we consider the most likely state.}
 
 \item{max_iter}{Maximum number of EM iterations.}
 
 \item{tol}{Convergence tolerance for the negative log-likelihood.}
-
-\item{M}{Numeric vector of observed process \eqn{M_{t_n}}.}
-
-\item{mu}{Numeric vector of deterministic drift \eqn{\mu_{t_n}}.}
-
-\item{Q_init}{Initial generator matrix for the hidden Markov chain.}
-
-\item{m_init}{Initial emission means for the hidden states.}
-
-\item{a}{Numeric vector of OU drift parameters \eqn{a_i}.}
-
-\item{gamma_init}{Initial values for mean-reversion parameters
-\eqn{(\gamma_0, \gamma_1)}.}
-
-\item{phi0}{Initial value of the bounded-variation process.}
 }
 \value{
 A list containing:
 \describe{
-\item{gamma}{Estimated mean-reversion parameters.}
-\item{phi}{Estimated bounded-variation process.}
-\item{p}{Filtered state probabilities.}
-\item{Q}{Estimated generator matrix.}
+\item{gamma0_estim}{Estimated parameter gamma0.}
+\item{gamma1_estim}{Estimated parameter gamma1.}
+\item{phi0_estim}{Estimated initial state.}
+\item{phi}{Estimated hidden process.}
+\item{MC_res}{Estimated Markov chain.}
 }
 }
 \description{
-Fits a continuous-time hidden Markov model with OU-type bounded
-variation dynamics using an EM-style iterative procedure.
+Fits a continuous-time hidden OUbv model
+using an EM-style iterative procedure.
 The latent Markov chain is estimated in continuous time, and
 the bounded-variation process is inferred using filtered
 state probabilities.
@@ -71,18 +76,7 @@ a Gaussian emission model.
 OU parameters via likelihood maximization.
 }
 }
-\examples{
-\dontrun{
-fit <- fit_cthoubv(deltaY, time, dt, M, mu,
-                     Q_init, m_init, a,
-                     gamma_init, phi0, sigma_s)
-}
-
-}
 \references{
 Baum, L. E., et al. (1970). A maximization technique occurring in
 the statistical analysis of probabilistic functions of Markov chains.
-}
-\seealso{
-\code{\link{step1_cthmm}}, \code{\link{compute_phi}}
 }

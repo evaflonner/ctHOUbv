@@ -20,7 +20,7 @@
 #' 
 compute_oubv <- function(prob0, prob1, gamma0, gamma1, phi0, dt) {
   phi <- numeric(length(prob0))
-  
+  phi[1] <- phi0
   for(j in 1:length(prob0)){
     phi[j+1] <-phi[j]+prob0[j]*(gamma1*dt-gamma1*phi[j]*dt)+prob1[j]*(-gamma0*phi[j]*dt)
   }
