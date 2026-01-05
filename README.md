@@ -82,9 +82,7 @@ $$\phi_0 \in \left(\frac{a_{e_2}}{\gamma_{e_2}}, \frac{a_{e_1}}{\gamma_{e_1}}\ri
 then the solution $\phi_t$ remains in this interval for all
 $t \ge 0$.
 
-In the default specification used for weights, $$
-a_{e_2} = 0, \quad a_{e_1} = \gamma_{e_1}, \quad \phi_t \in (0,1).
-$$
+In the default specification used for weights, $a_{e_2} = 0$, $a_{e_1} = \gamma_{e_1}$, $\phi_t \in (0,1)$.
 
 ------------------------------------------------------------------------
 
